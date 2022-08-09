@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.agendafirebase.Objetos.Contactos;
 import com.example.agendafirebase.Objetos.ReferenciasFireBase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

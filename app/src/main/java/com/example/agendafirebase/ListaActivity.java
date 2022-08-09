@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.agendafirebase.Objetos.Contactos;
 import com.example.agendafirebase.Objetos.ReferenciasFireBase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,12 +33,14 @@ public class ListaActivity extends AppCompatActivity {
     private FirebaseDatabase basedatabase;
     private DatabaseReference referencia;
     private Button btnNuevo;
+    private Button btnCerrarSesion;
     final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
+        btnCerrarSesion = (Button) findViewById(R.id.btnCerrarSesion);
         this.basedatabase = FirebaseDatabase.getInstance();
         this.referencia = this.basedatabase.getReferenceFromUrl
                 (ReferenciasFireBase.URL_DATABASE +
@@ -50,6 +53,19 @@ public class ListaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setResult(Activity.RESULT_CANCELED);
+                Intent intent = new Intent(ListaActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(Activity.RESULT_CANCELED);
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ListaActivity.this, LoginActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -131,11 +147,13 @@ public class ListaActivity extends AppCompatActivity {
             btnModificar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Bundle oBundle = new Bundle();
                     oBundle.putSerializable("contacto", objects.get(position));
-                    Intent i = new Intent();
-                    i.putExtras(oBundle);
-                    setResult(Activity.RESULT_OK, i);
+                    Intent intent = new Intent(ListaActivity.this,MainActivity.class);
+                    setResult(Activity.RESULT_OK, intent);
+                    //startActivity(intent.putExtras(oBundle));
+                    intent.putExtras(oBundle);
                     finish();
                 }
             });

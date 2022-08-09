@@ -15,12 +15,24 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         tools:ignore="MissingConstraints">
+
         <Button
             android:id="@+id/btnNuevo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nuevo">
-        </Button>
+            android:text="@string/nuevo"></Button>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right">
+            <Button
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Cerrar Sesion">
+            </Button>
+        </LinearLayout>
         <TextView
             android:id="@+id/lblDisponibles"
             android:layout_below="@+id/btnNuevo"
